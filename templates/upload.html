@@ -11,5 +11,28 @@
       {% csrf_token %} {{ form }}
       <input type="submit" value="Submit" />
     </form>
+    <div>
+      {% if form_submitted %}
+      <p>form is recieved successfully</p>
+      <p>Please wait for the 30 secs to get the feedback</p>
+      {% endif %}
+    </div>
+    <div id="button-container">
+      <a href="{% url 'feedback_ready' %}">
+        <button id="feedback-button" style="display: none">
+          Get feedback...
+        </button></a
+      >
+    </div>
+    {{ feedback }}
   </body>
+  <script>
+    setTimeout(function () {
+      var buttonContainer = document.getElementById("button-container");
+      var feedbackButton = document.getElementById("feedback-button");
+      if (buttonContainer && feedbackButton) {
+        feedbackButton.style.display = "block";
+      }
+    }, 30000); // 30 seconds
+  </script>
 </html>

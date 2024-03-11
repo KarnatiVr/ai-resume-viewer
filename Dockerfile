@@ -13,3 +13,4 @@ USER root
 
 COPY . . 
 
+# Run Celery worker command
