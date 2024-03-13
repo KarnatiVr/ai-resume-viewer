@@ -4,29 +4,70 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AI Resume viewer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+      @layer utilities {
+        .content-auto {
+          content-visibility: auto;
+        }
+      }
+    </style>
   </head>
-  <body>
-    <h1>Hello there!</h1>
-    <form action="upload" method="post" enctype="multipart/form-data">
-      {% csrf_token %} {{ form }}
-      <input type="submit" value="Submit" />
-    </form>
-    <div>
-      {% if form_submitted %}
-      <p>form is recieved successfully</p>
-      <p>Please wait for the 30 secs to get the feedback</p>
-      {% endif %}
-    </div>
-    <div id="button-container">
-      <a href="{% url 'feedback_ready' %}">
-        <button id="feedback-button" style="display: none">
-          Get feedback...
-        </button></a
+  <body class="bg-white dark:bg-gray-900 bg-[url('https://flowbite.s3.amazonaws.com/docs/jumbotron/hero-pattern.svg')] dark:bg-[url('https://flowbite.s3.amazonaws.com/docs/jumbotron/hero-pattern-dark.svg')]">
+    <div class="container max-w-96 mx-auto mt-10 outline outline-offset-2 outline-1 outline-white p-8">
+      <h1 class="text-3xl font-semibold dark:text-white">Get Instant Resume Feedback</h1>
+      <form action="upload" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label
+          for="name"
+          class="block my-5 text-xl font-medium text-gray-900 dark:text-white"
+          >Name</label
+        >
+        <input
+          type="text"
+          id="name"
+          value="{{ form.name.value }}"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Kirshna"
+          required
+        />
+        <label
+          class="block my-5 text-xl font-medium text-gray-900 dark:text-white"
+          for="file_input"
+          >Upload file</label
+        >
+        <input
+          class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+          id="file_input"
+          type="file"
+          value="{{ form.resume.value}}"
+        />
+        <input type="submit" value="Submit" />
+      </form>
+      <div>
+        {% if form_submitted %}
+        <p>form is recieved successfully</p>
+        <p>Please wait for the 30 secs to get the feedback</p>
+        {% endif %}
+      </div>
+      <div id="button-container">
+        <a href="{% url 'feedback_ready' %}">
+          <button id="feedback-button" style="display: none">
+            Get feedback...
+          </button></a
+        >
+      </div>
+      <pre id="content">
+    {{feedback}}
+    </pre
       >
     </div>
-    {{ feedback }}
   </body>
   <script>
+    document.getElementById("content").innerHTML = document
+      .getElementById("content")
+      .innerHTML.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+
     setTimeout(function () {
       var buttonContainer = document.getElementById("button-container");
       var feedbackButton = document.getElementById("feedback-button");

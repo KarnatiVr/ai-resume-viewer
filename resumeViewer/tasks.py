@@ -8,27 +8,29 @@ from .models import User
 import google.generativeai as genai
 
 
-genai.configure(api_key="AIzaSyCS5HSz39mib7aGO4lr2EvzFtcMkD8ADGg")
+
+genai.configure(api_key="AIzaSyAnAhl2HDXxCJXIOdJMeI5oJ-QOLv8C51o")
 
 model = genai.GenerativeModel('gemini-pro')
 
 
+
+
 @shared_task
 def get_feedback(text,id):
-    response = model.generate_content("send me feedback on this resume"+text)
+    response = model.generate_content("send me feedback of this resume"+text)
     print("response =>",response)
-  # to_markdown(response.text)
-    user=User.objects.get(pk=id)
+    # user=User.objects.get(pk=id)
 
-    res=''
+    # res=''
     with open('output.txt', 'w') as f:
         for chunk in response:
             f.write(chunk.text)
             f.write("\n" + "_"*80 + "\n")
-            res+=chunk.text
+            # res+=chunk.text
 
-    user.feedback=res
-    user.save()
+    # user.feedback=response
+    # user.save()
     
 
 

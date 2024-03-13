@@ -31,11 +31,16 @@ def upload_resume(request):
             return HttpResponse("Error", content_type='text/plain')
     else:
         form = ResumeForm()
-        return render(request, 'upload.html',{'form':form,'form_submitted':False,'show':True})
+        return render(request, 'upload.html',{'form':form,'form_submitted':False,'show':False})
     
 def feedback_ready(request):
         form = ResumeForm()
         with open('output.txt', 'r') as file:
             # Read the entire content of the file into a variable as a single string
-            feedback= file.read()  
+            # feedback= file.read().replace("*", "").strip()  
+            feedback= file.read()
+
+        # content=feedback.split('.')
+        # print(content[0])
+        # feedback=User.objects.first().feedback
         return render(request, 'upload.html',{"feedback":feedback,'show':False})
