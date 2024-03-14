@@ -15,6 +15,8 @@ def upload_resume(request):
         form = ResumeForm(request.POST,request.FILES)
         # check whether it's valid:
         # print(form.is_valid())
+        # resume=request.FILES['resume']
+
         if form.is_valid():
             # User.objects.create()
             resume=request.FILES['resume']
@@ -23,9 +25,8 @@ def upload_resume(request):
                 user_instance = User.objects.create(name=name,resume=resume)
                 user_instance.save()
                 extract_text_from_pdf.delay(user_instance.id) 
-                return render(request, 'upload.html',{'form':form, 'form_submitted':True,'show':False})      
+                return render(request, 'upload.html',{'form_submitted':True,'show':False})      
 
-            # return HttpResponse("thanks for submitting the form", content_type='text/plain')
         else:
             print(form.errors)  # Print form errors to console for debugging
             return HttpResponse("Error", content_type='text/plain')
@@ -36,11 +37,12 @@ def upload_resume(request):
 def feedback_ready(request):
         form = ResumeForm()
         with open('output.txt', 'r') as file:
-            # Read the entire content of the file into a variable as a single string
-            # feedback= file.read().replace("*", "").strip()  
-            feedback= file.read()
 
-        # content=feedback.split('.')
-        # print(content[0])
-        # feedback=User.objects.first().feedback
+            feedback= file.read()
+        
+        with open('output.txt', 'w') as file:
+
+            file.write('')
+
+
         return render(request, 'upload.html',{"feedback":feedback,'show':False})
