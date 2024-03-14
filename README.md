@@ -18,6 +18,9 @@ Docker - if not installed click [here](https://docs.docker.com/engine/install/) 
 GIT - if not installed click [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) to install.  
 Code editor of your choice.
 
+## Project Implementation:  
+This Dockerized project utilizes PostgreSQL as its database backend, integrating Celery for asynchronous task processing. It leverages the Gemini API for providing feedback on uploaded resumes, enabling scalable and efficient handling of resume analysis tasks.
+
 **Clone the Repo**:
 ```
 # SSH
@@ -43,9 +46,12 @@ docker compose up
 
 **Open the terminal inside the app container in docker**:   
 
-![Please refer to docs/Screenshot(210) if not opened](.docs/Screenshot(210).png)  
+![Please refer to docs/Screenshot(210) if not opened](.docs/Screenshot(210).png)   
 
-**run this command inside the app container**:
+![Please refer to docs/Screenshot(211) if not opened](.docs/Screenshot(211).png)   
+
+
+**Run this command inside the app container**:
 ```
 celery -A core worker --loglevel=INFO
 ```
