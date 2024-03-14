@@ -41,8 +41,11 @@ docker compose up
 
 ```
 
-**Open the terminal inside the app container in docker**:  
-![Please refer to docs/Screenshot(210) if not opened](.docs/Screenshot(210).png)
+**Open the terminal inside the app container in docker**:   
+
+![Please refer to docs/Screenshot(210) if not opened](.docs/Screenshot(210).png)  
 
 **run this command inside the app container**:
-
+```
+celery -A core worker --loglevel=INFO
+```
