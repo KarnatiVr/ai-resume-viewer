@@ -55,3 +55,9 @@ docker compose up
 ```
 celery -A core worker --loglevel=INFO
 ```
+**Open Browser and localhost:8000**  
+
+you will see this  
+
+![Please refer to docs/Screenshot(212) if not opened](/docs/Screenshot%20(212).png)   
+
