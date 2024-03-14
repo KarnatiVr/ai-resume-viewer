@@ -41,6 +41,6 @@ docker compose up
 
 ```
 
-**Open the terminal inside the app container in docker**:
-![docker-image](./docs/Screenshot(210).png)
+**Open the terminal inside the app container in docker**:  
+![docker-image](.docs/Screenshot(210).png)
 
