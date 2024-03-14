@@ -34,6 +34,7 @@ def upload_resume(request):
         form = ResumeForm()
         return render(request, 'upload.html',{'form':form,'form_submitted':False,'show':False})
     
+    
 def feedback_ready(request):
         form = ResumeForm()
         with open('output.txt', 'r') as file:
