@@ -46,9 +46,9 @@ docker compose up
 
 **Open the terminal inside the app container in docker**:   
 
-![Please refer to docs/Screenshot(210) if not opened](.docs/Screenshot(210).png)   
+![Please refer to docs/Screenshot(210) if not opened](/docs/Screenshot%20(210).png)   
 
-![Please refer to docs/Screenshot(211) if not opened](.docs/Screenshot(211).png)   
+![Please refer to docs/Screenshot(211) if not opened](/docs/Screenshot%20(211).png)   
 
 
 **Run this command inside the app container**:
